@@ -1,0 +1,14 @@
+{
+  "name": "rimac-starwar-api",
+  "version": "1.0.0",
+  "description": "Rimac challenge, API with integration star wart api",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Challenge"
+  ],
+  "author": "Jean Alessi Reynoso Mena <jreynoso.mena@gmail.com>",
+  "license": "MIT"
+}
