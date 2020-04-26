@@ -1,5 +1,7 @@
-var swapiModule = (function () {
-  var rootURL = "https://swapi.co/api/";
+const fetch = require('node-fetch');
+
+const swapiModule = (function () {
+  var rootURL = "https://swapi.py4e.com/api/";
 
   function request(url, cb) {
     return fetch(url)
@@ -77,4 +79,6 @@ var swapiModule = (function () {
     getVehicle: singularRequestGenerator("vehicles"),
     getVehicles: pluralRequestGenerator("vehicles")
   };
-})();
+})()
+
+export default swapiModule

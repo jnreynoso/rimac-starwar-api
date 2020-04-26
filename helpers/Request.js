@@ -96,6 +96,16 @@ export default class Request {
   }
 
   /**
+     * Get a value from the method
+     *
+     * @returns {*}
+     * @public
+     */
+  method() {
+    return this.event.httpMethod || ''
+  }
+
+  /**
    * Get a value from the headers
    *
    * @param key

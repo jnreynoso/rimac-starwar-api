@@ -42,7 +42,17 @@ module.exports = {
   },
   resolve: {
     alias: {
-      'xsigma-helpers': path.resolve(__dirname, 'helpers')
+      'swapi-helpers': path.resolve(__dirname, 'helpers'),
+      'swapi-database': path.resolve(__dirname, 'database'),
+      'swapi-utils': path.resolve(__dirname, 'utils'),
+      'swapi-controllers': path.resolve(__dirname, 'controllers'),
+      'swapi-repositories': path.resolve(__dirname, 'repositories')
     }
-  }
+  },
+  plugins: [
+    new CopyWebpackPlugin([
+      { from: 'resources', to: 'functions/resources' },
+      { from: 'database/models', to: 'functions/models' }
+    ])
+  ]
 }
