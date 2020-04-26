@@ -57,6 +57,15 @@ functions:
           method: any
           cors: true
 
+  people:
+    description: A People resource is an individual person or character within the Star Wars universe.
+    handler: functions/people.handler
+    events:
+      - http:
+          path: api/people
+          method: any
+          cors: true
+
 resources:
   Resources:
     ApiGatewayRestApi:

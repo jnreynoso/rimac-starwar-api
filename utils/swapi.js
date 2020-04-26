@@ -1,7 +1,10 @@
 const fetch = require('node-fetch');
+const yenv = require('yenv')
+const env = process.env.NODE_ENV || 'development'
+const stage = yenv('.env.yml', { env })
 
 const swapiModule = (function () {
-  var rootURL = "https://swapi.py4e.com/api/";
+  var rootURL = stage.SWAPI_URL;
 
   function request(url, cb) {
     return fetch(url)

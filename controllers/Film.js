@@ -1,12 +1,13 @@
+import { concat, get } from 'lodash'
 import { BaseController, Middleware } from 'swapi-helpers'
 import { Swapi } from 'swapi-utils'
 
 const { CorsMiddleware } = Middleware
 
-const getFilmRepositorys = () => {
+const getFilms = () => {
   return new Promise(
     (resolve, reject) => {
-      Swapi.getFilmRepositorys(data => resolve(data))
+      Swapi.getFilms(data => resolve(data))
     }
   )
 }
@@ -53,12 +54,18 @@ class FilmRepositoryController extends BaseController {
   async get() {
     const { FilmRepository } = this.unitOfWork
     const filters = this.request.query()
-    const films = []
-    const filmsApi = await getFilmRepositorys()
+    const films = await FilmRepository.get(filters) || []
+
+    const filmsApi = await getFilms()
+    const results = concat(
+      get(filmsApi, 'results', []),
+      films
+    )
 
     return {
       ...filmsApi,
-      results: filmsApi.results.concat(films)
+      results,
+      count: filmsApi.count + results.length
     }
   }
 
@@ -72,26 +79,31 @@ class FilmRepositoryController extends BaseController {
 
   async create() {
     const { FilmRepository } = this.unitOfWork
-    const {
-      people,
-      planet,
-      specie,
-      starship,
-      vehicle,
-      ...film
-    } = this.request.post()
+    const film = this.request.post()
 
-    const filmSaved = await FilmRepository.create(film)
+    const created = Date(Date.now()).toString()
+    const filmSaved = await FilmRepository.create({ ...film, created })
 
-    if (people) {
-      if (Array.isArray(people)) {
-        const asyncOperations = await Promise.all(
-          people.map(e => filmSaved.createFilmRepositoryRelation({ relation_id: e }))
-        )
-      } else {
-        filmSaved.createFilmRepositoryRelation({ relation_id: people })
+    const childs = ['people', 'planet', 'specie', 'starship', 'vehicle']
+    const checkAndCreateChilds = (entity = null) => {
+      if (film[entity]) {
+        if (Array.isArray(film[entity])) {
+          return film[entity].map(e => filmSaved.createFilmRelation({
+            relation_id: e,
+            relation: entity,
+            created
+          }))
+        } else {
+          return filmSaved.createFilmRelation({
+            relation_id: film[entity],
+            relation: entity,
+            created
+          })
+        }
       }
     }
+
+    await Promise.all(childs.map(e => checkAndCreateChilds(e)))
 
     return filmSaved
   }

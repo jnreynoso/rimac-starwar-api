@@ -13,6 +13,10 @@ module.exports = {
         type: DataTypes.INTEGER,
         allowNull: false
       },
+      relation: {
+        type: DataTypes.STRING,
+        allowNull: false
+      },
       relation_id: {
         type: DataTypes.INTEGER,
         allowNull: false

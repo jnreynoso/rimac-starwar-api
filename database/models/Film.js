@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = (sequelize, DataTypes) => {
-  const People = sequelize.define('Film', {
+  const Film = sequelize.define('Film', {
     id: {
       type: DataTypes.INTEGER,
       autoIncrement: true,
@@ -50,11 +50,53 @@ module.exports = (sequelize, DataTypes) => {
     timestamps: false
   });
 
-  People.associate = function (models) {
-    People.hasOne(models.FilmRelation, {
+  Film.associate = function (models) {
+    Film.hasOne(models.FilmRelation, {
       foreignKey: 'film_id'
     })
+
+    Film.hasMany(models.FilmRelation, {
+      foreignKey: 'relation_id',
+      constraints: false,
+      scope: {
+        relation: 'people'
+      }
+    })
+
+    Film.hasMany(models.FilmRelation, {
+      foreignKey: 'relation_id',
+      constraints: false,
+      scope: {
+        relation: 'planet'
+      }
+    })
+
+    Film.hasMany(models.FilmRelation, {
+      foreignKey: 'relation_id',
+      constraints: false,
+      scope: {
+        relation: 'specie'
+      }
+    })
+
+    Film.hasMany(models.FilmRelation, {
+      foreignKey: 'relation_id',
+      constraints: false,
+      scope: {
+        relation: 'starship'
+      }
+    })
+
+    Film.hasMany(models.FilmRelation, {
+      foreignKey: 'relation_id',
+      constraints: false,
+      scope: {
+        relation: 'vehicle'
+      }
+    })
+
+
   }
 
-  return People;
+  return Film;
 };

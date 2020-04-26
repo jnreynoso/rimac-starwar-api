@@ -16,6 +16,10 @@ module.exports = (sequelize, DataTypes) => {
         key: 'id'
       }
     },
+    relation: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
     relation_id: {
       type: DataTypes.INTEGER,
       allowNull: false

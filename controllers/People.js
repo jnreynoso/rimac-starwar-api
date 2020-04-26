@@ -74,7 +74,8 @@ class PeopleRepositoryController extends BaseController {
     const { PeopleRepository } = this.unitOfWork
     const people = this.request.post()
 
-    const peopleSaved = await PeopleRepository.create(people)
+    const created = Date(Date.now()).toString()
+    const peopleSaved = await PeopleRepository.create({ ...people, created })
 
     return peopleSaved
   }
