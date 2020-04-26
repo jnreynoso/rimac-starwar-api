@@ -1,7 +1,10 @@
 'use strict';
 
+const ip = require('ip');
+const env = process.env.NODE_ENV || 'development'
+
 module.exports = (sequelize, DataTypes) => {
-  const People = sequelize.define('Specie', {
+  const Specie = sequelize.define('Specie', {
     id: {
       type: DataTypes.INTEGER,
       autoIncrement: true,
@@ -58,7 +61,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     url: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: true
     }
   }, {
     tableName: 'specie',
@@ -66,5 +69,28 @@ module.exports = (sequelize, DataTypes) => {
     timestamps: false
   });
 
-  return People;
+  Specie.associate = function (models) {
+    Specie.belongsToMany(models.Film, {
+      through: {
+        model: models.FilmRelation,
+        unique: false,
+        scope: {
+          relation: 'specie'
+        }
+      },
+      foreignKey: 'relation_id',
+      constraints: false
+    })
+  }
+
+  Specie.addHook('afterCreate', async (specie, options) => {
+    await Specie.update({ url: `http://${ip.address()}/${env}/api/specie/${specie.id}` }, {
+      where: {
+        id: specie.id
+      },
+      transaction: options.transaction
+    });
+  })
+
+  return Specie;
 };

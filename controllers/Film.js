@@ -1,6 +1,8 @@
-import { concat, get } from 'lodash'
+import { map, concat, get } from 'lodash'
 import { BaseController, Middleware } from 'swapi-helpers'
 import { Swapi } from 'swapi-utils'
+import { FilmDTO } from '../dtos'
+import { FilmMapping } from '../mappers'
 
 const { CorsMiddleware } = Middleware
 
@@ -53,14 +55,28 @@ class FilmRepositoryController extends BaseController {
 
   async get() {
     const { FilmRepository } = this.unitOfWork
-    const filters = this.request.query()
+    const { lang, ...filters } = this.request.query()
     const films = await FilmRepository.get(filters) || []
 
     const filmsApi = await getFilms()
-    const results = concat(
+
+    var results = concat(
       get(filmsApi, 'results', []),
       films
     )
+
+    if (lang) {
+      results = map(results, e => {
+        const filmDTO = new FilmDTO(e)
+        const filmMapping = new FilmMapping(filmDTO)
+
+        if (lang === 'es' || lang === 'ES')
+          return filmMapping.toSpanish()
+        else
+          return filmDTO
+
+      })
+    }
 
     return {
       ...filmsApi,

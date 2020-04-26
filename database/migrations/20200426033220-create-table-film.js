@@ -43,7 +43,7 @@ module.exports = {
       },
       url: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: true
       }
     });
   },

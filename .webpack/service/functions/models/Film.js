@@ -1,5 +1,8 @@
 'use strict';
 
+const ip = require('ip');
+const env = process.env.NODE_ENV || 'development'
+
 module.exports = (sequelize, DataTypes) => {
   const Film = sequelize.define('Film', {
     id: {
@@ -42,7 +45,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     url: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: true
     }
   }, {
     tableName: 'film',
@@ -51,52 +54,76 @@ module.exports = (sequelize, DataTypes) => {
   });
 
   Film.associate = function (models) {
-    Film.hasOne(models.FilmRelation, {
-      foreignKey: 'film_id'
-    })
-
-    Film.hasMany(models.FilmRelation, {
+    Film.belongsToMany(models.People, {
+      through: {
+        model: models.FilmRelation,
+        unique: false,
+        scope: {
+          relation: 'people'
+        }
+      },
       foreignKey: 'relation_id',
-      constraints: false,
-      scope: {
-        relation: 'people'
-      }
+      constraints: false
     })
 
-    Film.hasMany(models.FilmRelation, {
+    Film.belongsToMany(models.Planet, {
+      through: {
+        model: models.FilmRelation,
+        unique: false,
+        scope: {
+          relation: 'planet'
+        }
+      },
       foreignKey: 'relation_id',
-      constraints: false,
-      scope: {
-        relation: 'planet'
-      }
+      constraints: false
     })
 
-    Film.hasMany(models.FilmRelation, {
+    Film.belongsToMany(models.Specie, {
+      through: {
+        model: models.FilmRelation,
+        unique: false,
+        scope: {
+          relation: 'specie'
+        }
+      },
       foreignKey: 'relation_id',
-      constraints: false,
-      scope: {
-        relation: 'specie'
-      }
+      constraints: false
     })
 
-    Film.hasMany(models.FilmRelation, {
+    Film.belongsToMany(models.Starship, {
+      through: {
+        model: models.FilmRelation,
+        unique: false,
+        scope: {
+          relation: 'starship'
+        }
+      },
       foreignKey: 'relation_id',
-      constraints: false,
-      scope: {
-        relation: 'starship'
-      }
+      constraints: false
     })
 
-    Film.hasMany(models.FilmRelation, {
+    Film.belongsToMany(models.Vehicle, {
+      through: {
+        model: models.FilmRelation,
+        unique: false,
+        scope: {
+          relation: 'vehicle'
+        }
+      },
       foreignKey: 'relation_id',
-      constraints: false,
-      scope: {
-        relation: 'vehicle'
-      }
+      constraints: false
     })
-
-
   }
+
+  Film.addHook('afterCreate', async (film, options) => {
+    await Film.update({ url: `http://${ip.address()}/${env}/api/people/${film.id}` }, {
+      where: {
+        id: film.id
+      },
+      transaction: options.transaction
+    });
+
+  })
 
   return Film;
 };

@@ -1,5 +1,8 @@
 'use strict';
 
+const ip = require('ip');
+const env = process.env.NODE_ENV || 'development'
+
 module.exports = (sequelize, DataTypes) => {
   const People = sequelize.define('People', {
     id: {
@@ -54,13 +57,73 @@ module.exports = (sequelize, DataTypes) => {
     },
     url: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: true
     }
   }, {
     tableName: 'people',
     freezeTableName: true,
     timestamps: false
   });
+
+  People.associate = function (models) {
+    People.belongsToMany(models.Specie, {
+      through: {
+        model: models.PeopleRelation,
+        unique: false,
+        scope: {
+          relation: 'specie'
+        }
+      },
+      foreignKey: 'relation_id',
+      constraints: false
+    })
+
+    People.belongsToMany(models.Starship, {
+      through: {
+        model: models.PeopleRelation,
+        unique: false,
+        scope: {
+          relation: 'starship'
+        }
+      },
+      foreignKey: 'relation_id',
+      constraints: false
+    })
+
+    People.belongsToMany(models.Vehicle, {
+      through: {
+        model: models.PeopleRelation,
+        unique: false,
+        scope: {
+          relation: 'vehicle'
+        }
+      },
+      foreignKey: 'relation_id',
+      constraints: false
+    })
+
+    People.belongsToMany(models.Film, {
+      through: {
+        model: models.FilmRelation,
+        unique: false,
+        scope: {
+          relation: 'people'
+        }
+      },
+      foreignKey: 'relation_id',
+      constraints: false
+    })
+  }
+
+  People.addHook('afterCreate', async (people, options) => {
+    await People.update({ url: `http://${ip.address()}/${env}/api/people/${people.id}` }, {
+      where: {
+        id: people.id
+      },
+      transaction: options.transaction
+    });
+
+  })
 
   return People;
 };

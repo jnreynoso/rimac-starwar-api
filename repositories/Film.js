@@ -1,4 +1,5 @@
 import IRepository from './IRepository'
+import { map } from 'lodash'
 
 class FilmRepository extends IRepository {
   constructor(dbContext) {
@@ -34,9 +35,42 @@ class FilmRepository extends IRepository {
   async get(filters) {
     try {
       const { Film } = this.dbContext
-      const film = await Film.findAll(filters)
+      const films = await Film.findAll({ where: filters })
 
-      return film
+      const peoples = await Promise.all(films.map(e => e.getPeople()))
+      const planets = await Promise.all(films.map(e => e.getPlanets()))
+      const species = await Promise.all(films.map(e => e.getSpecies()))
+      const starships = await Promise.all(films.map(e => e.getStarships()))
+      const vehicles = await Promise.all(films.map(e => e.getVehicles()))
+
+      const getUrl = arr => map(arr, e => e.url)
+
+      const filmsWithPeople = map(films, (a, index) => {
+        const [
+          peoplesUrl,
+          planetsUrl,
+          speciesUrl,
+          starshipsUrl,
+          vehiclesUrl
+        ] = [
+            getUrl(peoples[index]),
+            getUrl(planets[index]),
+            getUrl(species[index]),
+            getUrl(starships[index]),
+            getUrl(vehicles[index])
+          ]
+
+        return {
+          ...a.dataValues,
+          characters: peoplesUrl,
+          species: speciesUrl,
+          planets: planetsUrl,
+          startship: starshipsUrl,
+          vehicles: vehiclesUrl
+        }
+      })
+
+      return filmsWithPeople
     } catch (e) {
       console.log(e)
     }

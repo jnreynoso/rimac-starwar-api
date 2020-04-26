@@ -12,6 +12,10 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       allowNull: false
     },
+    relation: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
     relation_id: {
       type: DataTypes.INTEGER,
       allowNull: false
@@ -29,26 +33,6 @@ module.exports = (sequelize, DataTypes) => {
     freezeTableName: true,
     timestamps: false
   });
-
-  PeopleRelation.associate = function (models) {
-    PeopleRelation.belongsTo(models.Specie, {
-      foreignKey: 'relation_id',
-      constraints: false,
-      as: 'peopleSpecie'
-    })
-
-    PeopleRelation.belongsTo(models.Starship, {
-      foreignKey: 'relation_id',
-      constraints: false,
-      as: 'peopleStarship'
-    })
-
-    PeopleRelation.belongsTo(models.Vehicle, {
-      foreignKey: 'relation_id',
-      constraints: false,
-      as: 'peopleVehicle'
-    })
-  }
 
   return PeopleRelation
 }

@@ -1,5 +1,8 @@
 'use strict';
 
+const ip = require('ip');
+const env = process.env.NODE_ENV || 'development'
+
 module.exports = (sequelize, DataTypes) => {
   const Starship = sequelize.define('Starship', {
     id: {
@@ -70,13 +73,36 @@ module.exports = (sequelize, DataTypes) => {
     },
     url: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: true
     }
   }, {
     tableName: 'starship',
     freezeTableName: true,
     timestamps: false
   });
+
+  Starship.associate = function (models) {
+    Starship.belongsToMany(models.Film, {
+      through: {
+        model: models.FilmRelation,
+        unique: false,
+        scope: {
+          relation: 'starship'
+        }
+      },
+      foreignKey: 'relation_id',
+      constraints: false
+    })
+  }
+
+  Starship.addHook('afterCreate', async (starship, options) => {
+    await Starship.update({ url: `http://${ip.address()}/${env}/api/starship/${starship.id}` }, {
+      where: {
+        id: starship.id
+      },
+      transaction: options.transaction
+    });
+  })
 
   return Starship;
 };
