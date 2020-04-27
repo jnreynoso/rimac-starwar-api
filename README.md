@@ -12,16 +12,31 @@ npm install
 
 ### Setup Environment
 
-Hacer una copia del archivo de entorno de ejemplo y configurar las variables correspondientes.
-Considerar *NODE_ENV* con el valor *development* `(Por defecto tendrá este valor)`.
+Hacer una copia del archivo de variables de entorno `(env.example.yml)` y configurar las variables correspondientes.
+Considerar *NODE_ENV* con el valor *"development"* `(Por defecto tendrá este valor)`.
 
 ```sh
 cp env.example.yml .env.yml
 ```
+```yaml
+development:
+  DB_USERNAME: ""
+  DB_PASSWORD: ""
+  DB_DATABASE: ""
+  DB_PORT: 3306
+  DB_HOST: "localhost"
+  DB_DIALECT: "mysql"
+  SWAPI_URL: "https://swapi.py4e.com/api/"
+```
+Será necesario crear una base de datos.
+
+```sql
+CREATE DATABASE starwar;
+```
 
 ### Migrations
 
-Ejecutar las migraciones para la creación del modelo de base de datos.
+Ejecutar las migraciones para la creación de tablas. Estas serán creadas en la base de datos especificada en el archivo *.env.yml* `(DB_DATABASE)`
 
 ```sh
 npx sequelize-cli db:migrate 
