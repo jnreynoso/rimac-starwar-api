@@ -4,7 +4,7 @@
 
 ### Installation 
 
-Instalar módulos npm.
+Instale módulos npm.
 
 ```sh
 npm install
@@ -12,8 +12,8 @@ npm install
 
 ### Setup Environment
 
-Hacer una copia del archivo de variables de entorno `(env.example.yml)` y configurar las variables correspondientes.
-Considerar *NODE_ENV* con el valor *"development"* `(Por defecto tendrá este valor)`.
+Realice una copia del archivo de variables de entorno `(env.example.yml)` y configure las variables correspondientes.
+Considere *NODE_ENV* con el valor *"development"* `(Por defecto tendrá este valor)`.
 
 ```sh
 cp env.example.yml .env.yml
@@ -36,7 +36,7 @@ CREATE DATABASE starwar;
 
 ### Migrations
 
-Ejecutar las migraciones para la creación de tablas. Estas serán creadas en la base de datos especificada en el archivo *.env.yml* `(DB_DATABASE)`
+Ejecute las migraciones para la creación de tablas. Estas serán creadas en la base de datos especificada en el archivo *.env.yml* `(DB_DATABASE)`
 
 ```sh
 npx sequelize-cli db:migrate 
