@@ -83,3 +83,7 @@ You can operate on resources using HTTP methods such as `POST`, `GET`, `PUT`, an
 | ---------------------- | ---------------- | ----------- | ---------------------- | ------------------ |
 | `api/people`           | Create new pers  | List pers | Error                  | Error              |
 | `api/people/{id}`      | Error            | Get pers  | Update pers if exists| Delete people      |
+
+### Implementation Details
+
+El patrón de software utilizado es `Repository Pattern`. En la capa de persistencia de datos se utilizó *sequelize*. Se implemento una pequeña libreria para el manejo web (Request.js, Response.js, Middleware.js), ubicados en helpers. Estas clases abstraen el manejo de los `events` de AWS Lambda para volver el manejo lo mas parecido a frameworks como express.
