@@ -34,6 +34,12 @@ Será necesario crear una base de datos.
 CREATE DATABASE starwar;
 ```
 
+### Integration with [SWAPI](https://swapi.py4e.com/documentation)
+
+Dada la arquitectura señalada en el reto, será necesario especiar un API para la integración. Este endpoint podrá especificarse en la variable de entorno *SWAPI_URL* del archivo de configuración `.env.yml`. El que usaremos en este proyecto será `https://swapi.py4e.com/api/`
+
+![Arquitectura](https://i.ibb.co/nbdHq5C/arquitectura.jpg)
+
 ### Migrations
 
 Ejecute las migraciones para la creación de tablas. Estas serán creadas en la base de datos especificada en el archivo *.env.yml* `(DB_DATABASE)`
