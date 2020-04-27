@@ -4,7 +4,7 @@
 
 ### Installation 
 
-Instalar modulos npm.
+Instalar módulos npm.
 
 ```sh
 npm install
@@ -12,8 +12,8 @@ npm install
 
 ### Setup Environment
 
-Hacer una copia del archivo de entorno de ejemplo y setear las variables correspondientes.
-Considerar *NODE_ENV* con el valor *development* `(Por defecto tendra este valor)`.
+Hacer una copia del archivo de entorno de ejemplo y configurar las variables correspondientes.
+Considerar *NODE_ENV* con el valor *development* `(Por defecto tendrá este valor)`.
 
 ```sh
 cp env.example.yml .env.yml
@@ -21,7 +21,7 @@ cp env.example.yml .env.yml
 
 ### Migrations
 
-Ejecutar las migraciones para la creacion del modelo de base de datos.
+Ejecutar las migraciones para la creación del modelo de base de datos.
 
 ```sh
 npx sequelize-cli db:migrate 
