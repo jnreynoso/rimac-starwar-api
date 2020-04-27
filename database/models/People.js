@@ -69,36 +69,27 @@ module.exports = (sequelize, DataTypes) => {
     People.belongsToMany(models.Specie, {
       through: {
         model: models.PeopleRelation,
-        unique: false,
-        scope: {
-          relation: 'specie'
-        }
+        unique: false
       },
-      foreignKey: 'relation_id',
+      foreignKey: 'people_id',
       constraints: false
     })
 
     People.belongsToMany(models.Starship, {
       through: {
         model: models.PeopleRelation,
-        unique: false,
-        scope: {
-          relation: 'starship'
-        }
+        unique: false
       },
-      foreignKey: 'relation_id',
+      foreignKey: 'people_id',
       constraints: false
     })
 
     People.belongsToMany(models.Vehicle, {
       through: {
         model: models.PeopleRelation,
-        unique: false,
-        scope: {
-          relation: 'vehicle'
-        }
+        unique: false
       },
-      foreignKey: 'relation_id',
+      foreignKey: 'people_id',
       constraints: false
     })
 

@@ -21,6 +21,17 @@ class FilmRepository extends IRepository {
     }
   }
 
+  async createFilmRelation(filmRelation) {
+    try {
+      const { FilmRelation } = this.dbContext
+      const filmRelationSaved = await FilmRelation.create(filmRelation)
+
+      return filmRelationSaved
+    } catch (e) {
+      console.log(e)
+    }
+  }
+
   async update(id, film) {
     try {
       const { Film } = this.dbContext
@@ -37,7 +48,7 @@ class FilmRepository extends IRepository {
       const { Film } = this.dbContext
       const films = await Film.findAll({ where: filters })
 
-      const peoples = await Promise.all(films.map(e => e.getPeople()))
+      const peoples = await Promise.all(films.map(async e => e.getPeople()))
       const planets = await Promise.all(films.map(e => e.getPlanets()))
       const species = await Promise.all(films.map(e => e.getSpecies()))
       const starships = await Promise.all(films.map(e => e.getStarships()))

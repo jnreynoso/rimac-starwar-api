@@ -104,13 +104,15 @@ class FilmRepositoryController extends BaseController {
     const checkAndCreateChilds = (entity = null) => {
       if (film[entity]) {
         if (Array.isArray(film[entity])) {
-          return film[entity].map(e => filmSaved.createFilmRelation({
+          return film[entity].map(e => FilmRepository.createFilmRelation({
+            film_id: filmSaved.id,
             relation_id: e,
             relation: entity,
             created
           }))
         } else {
-          return filmSaved.createFilmRelation({
+          return FilmRepository.createFilmRelation({
+            film_id: filmSaved.id,
             relation_id: film[entity],
             relation: entity,
             created

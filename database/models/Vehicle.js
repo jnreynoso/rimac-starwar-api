@@ -85,6 +85,18 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: 'relation_id',
       constraints: false
     })
+
+    Vehicle.belongsToMany(models.People, {
+      through: {
+        model: models.PeopleRelation,
+        unique: false,
+        scope: {
+          relation: 'vehicle'
+        }
+      },
+      foreignKey: 'relation_id',
+      constraints: false
+    })
   }
 
 

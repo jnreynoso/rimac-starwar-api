@@ -57,48 +57,36 @@ module.exports = (sequelize, DataTypes) => {
     Film.belongsToMany(models.People, {
       through: {
         model: models.FilmRelation,
-        unique: false,
-        scope: {
-          relation: 'people'
-        }
+        unique: false
       },
-      foreignKey: 'relation_id',
+      foreignKey: 'film_id',
       constraints: false
     })
 
     Film.belongsToMany(models.Planet, {
       through: {
         model: models.FilmRelation,
-        unique: false,
-        scope: {
-          relation: 'planet'
-        }
+        unique: false
       },
-      foreignKey: 'relation_id',
+      foreignKey: 'film_id',
       constraints: false
     })
 
     Film.belongsToMany(models.Specie, {
       through: {
         model: models.FilmRelation,
-        unique: false,
-        scope: {
-          relation: 'specie'
-        }
+        unique: false
       },
-      foreignKey: 'relation_id',
+      foreignKey: 'film_id',
       constraints: false
     })
 
     Film.belongsToMany(models.Starship, {
       through: {
         model: models.FilmRelation,
-        unique: false,
-        scope: {
-          relation: 'starship'
-        }
+        unique: false
       },
-      foreignKey: 'relation_id',
+      foreignKey: 'film_id',
       constraints: false
     })
 
@@ -106,11 +94,8 @@ module.exports = (sequelize, DataTypes) => {
       through: {
         model: models.FilmRelation,
         unique: false,
-        scope: {
-          relation: 'vehicle'
-        }
       },
-      foreignKey: 'relation_id',
+      foreignKey: 'film_id',
       constraints: false
     })
   }

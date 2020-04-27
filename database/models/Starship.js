@@ -93,6 +93,18 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: 'relation_id',
       constraints: false
     })
+
+    Starship.belongsToMany(models.People, {
+      through: {
+        model: models.PeopleRelation,
+        unique: false,
+        scope: {
+          relation: 'starship'
+        }
+      },
+      foreignKey: 'relation_id',
+      constraints: false
+    })
   }
 
   Starship.addHook('afterCreate', async (starship, options) => {

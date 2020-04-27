@@ -81,6 +81,18 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: 'relation_id',
       constraints: false
     })
+
+    Specie.belongsToMany(models.People, {
+      through: {
+        model: models.PeopleRelation,
+        unique: false,
+        scope: {
+          relation: 'specie'
+        }
+      },
+      foreignKey: 'relation_id',
+      constraints: false
+    })
   }
 
   Specie.addHook('afterCreate', async (specie, options) => {
