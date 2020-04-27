@@ -90,7 +90,11 @@ El patrón de software utilizado es `Repository Pattern`. En la capa de persiste
 
 ### Start Project 
 
-Se iniciará un emulador de AWS λ en el puerto `8082`
+Se iniciará un emulador de AWS λ en el puerto `8082`. El formato de los endpoint será el siguiente:
+
+```sh
+http://{host}:8082/{environment}/api/film
+```
 
 ```sh
 npm start
