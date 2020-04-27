@@ -77,7 +77,7 @@ La estructura de los recursos de [`SWAPI`](https://swapi.py4e.com/documentation)
 Podemos agregar personas`(People)` al crear un recurso `Films`, especificando los **ids** o el **id** de persona(s) `(People)` existente. Esto para todos los hijos de Films `['people', 'planet', 'specie', 'starship', 'vehicle']`
 
 ```bash
-curl -X POST http://localhost:8082/development/api/film \
+curl -X POST http://localhost:8082/development/api/films \
     -H "Content-Type: application/json" \
     -d
 {
@@ -90,7 +90,7 @@ curl -X POST http://localhost:8082/development/api/film \
     "people": 1
 }
 
-curl -X POST http://localhost:8082/development/api/film \
+curl -X POST http://localhost:8082/development/api/films \
     -H "Content-Type: application/json" \
     -d
 {
@@ -114,7 +114,7 @@ curl -X POST http://localhost:8082/development/api/film \
 `api/films` acepta el parametro **lang**, especificado con el valor **es**, mapea los campos español, por defecto es ingles.
 
 ```bash
-http://localhost:8082/development/api/film?lang=es
+http://localhost:8082/development/api/films?lang=es
 ```
 
 ##### People
@@ -133,7 +133,7 @@ El patrón de software utilizado es `Repository Pattern`. En la capa de persiste
 Se iniciará un emulador de AWS λ en el puerto `8082`. El formato de los endpoint será el siguiente:
 
 ```sh
-http://{host}:8082/{environment}/api/film
+http://{host}:8082/{environment}/api/films
 ```
 
 ```sh
