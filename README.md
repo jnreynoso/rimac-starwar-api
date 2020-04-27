@@ -140,7 +140,7 @@ http://{host}:8082/{environment}/api/films
 npm start
 ```
 
-### Scripts
+### Scripts & Deploy
 
 Para generar los archivos *CloudFormation* ejecute:
 
