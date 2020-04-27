@@ -81,5 +81,5 @@ You can operate on resources using HTTP methods such as `POST`, `GET`, `PUT`, an
 
 | Resource / HTTP method | Post             | Get         | Patch                  | Delete             |
 | ---------------------- | ---------------- | ----------- | ---------------------- | ------------------ |
-| `api/people`           | Create new people| List people | Error                  | Error              |
+| `api/people`           | Create           | List people | Error                  | Error              |
 | `api/people/{id}`      | Error            | Get people  | Update person if exists| Delete people      |
