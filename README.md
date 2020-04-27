@@ -56,3 +56,30 @@ Plugins de serverless utilizados
 |:---------------------------|:-----------:|
 | **[Webpack - `serverless-webpack`](https://github.com/serverless-heaven/serverless-webpack)** <br/> Serverless plugin to bundle your lambdas with Webpack | ![Github Stars](https://img.shields.io/github/stars/serverless-heaven/serverless-webpack.svg?label=Stars&style=for-the-badge) <br/> ![NPM Downloads](https://img.shields.io/npm/dt/serverless-webpack.svg?label=Downloads&style=for-the-badge)|
 | **[Offline - `serverless-offline`](https://github.com/dherault/serverless-offline)** <br/> Emulate AWS λ and API Gateway locally when developing your Serverless project | ![Github Stars](https://img.shields.io/github/stars/dherault/serverless-offline.svg?label=Stars&style=for-the-badge) <br/> ![NPM Downloads](https://img.shields.io/npm/dt/serverless-offline.svg?label=Downloads&style=for-the-badge)|
+
+### Resources
+Los recursos implementados son los siguientes:
+
+- films
+- people
+
+| resource      | description                       |
+|:--------------|:----------------------------------|
+| `api/films`      | Listado de peliculas. |
+| `api/people`    | A People resource is an individual person or character within the Star Wars universe. |
+
+You can operate on resources using HTTP methods such as `POST`, `GET`, `PUT`, and `DELETE`.
+
+##### Films
+
+| Resource / HTTP method | Post             | Get         | Patch                  | Delete             |
+| ---------------------- | ---------------- | ----------- | ---------------------- | ------------------ |
+| `api/films`            | Create new film  | List films  | Error                  | Error              |
+| `api/films/{id}`       | Error            | Get film    | Update user if exists  | Delete film        |
+
+##### People
+
+| Resource / HTTP method | Post             | Get         | Patch                  | Delete             |
+| ---------------------- | ---------------- | ----------- | ---------------------- | ------------------ |
+| `api/people`           | Create new pers  | List pers | Error                  | Error              |
+| `api/people/{id}`      | Error            | Get pers  | Update pers if exists| Delete people      |
