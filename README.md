@@ -86,4 +86,4 @@ You can operate on resources using HTTP methods such as `POST`, `GET`, `PUT`, an
 
 ### Implementation Details
 
-El patrón de software utilizado es `Repository Pattern`. En la capa de persistencia de datos se utilizó *sequelize*. Se implemento una pequeña libreria para el manejo web `(Request.js, Response.js, Middleware.js)`, ubicados en *helpers*. Estas clases abstraen el manejo de los `events` de AWS Lambda para volverlo más parecido a frameworks como **express.js**.
+El patrón de software utilizado es `Repository Pattern`. En la capa de persistencia de datos se utilizó *sequelize*. Se implemento una pequeña libreria para el manejo web `(Request.js, Response.js, Middleware.js)`, ubicados en *helpers*. Estas clases abstraen el manejo web (`events` de AWS Lambda) para volverlo lo más parecido a frameworks como **express.js**.
