@@ -57,7 +57,7 @@ Plugins de serverless utilizados
 | **[Webpack - `serverless-webpack`](https://github.com/serverless-heaven/serverless-webpack)** <br/> Serverless plugin to bundle your lambdas with Webpack | ![Github Stars](https://img.shields.io/github/stars/serverless-heaven/serverless-webpack.svg?label=Stars&style=for-the-badge) <br/> ![NPM Downloads](https://img.shields.io/npm/dt/serverless-webpack.svg?label=Downloads&style=for-the-badge)|
 | **[Offline - `serverless-offline`](https://github.com/dherault/serverless-offline)** <br/> Emulate AWS λ and API Gateway locally when developing your Serverless project | ![Github Stars](https://img.shields.io/github/stars/dherault/serverless-offline.svg?label=Stars&style=for-the-badge) <br/> ![NPM Downloads](https://img.shields.io/npm/dt/serverless-offline.svg?label=Downloads&style=for-the-badge)|
 
-### Recursos
+### Resources
 Los recursos implementados son los siguientes:
 
 - films
@@ -82,4 +82,4 @@ You can operate on resources using HTTP methods such as `POST`, `GET`, `PUT`, an
 | Resource / HTTP method | Post             | Get         | Patch                  | Delete             |
 | ---------------------- | ---------------- | ----------- | ---------------------- | ------------------ |
 | `api/people`           | Create new people| List people | Error                  | Error              |
-| `api/people/{id}`      | Error            | Get people  | Update person if exists| Delete film        |
+| `api/people/{id}`      | Error            | Get people  | Update person if exists| Delete people      |
