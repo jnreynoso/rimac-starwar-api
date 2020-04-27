@@ -50,10 +50,10 @@ package:
 functions:
   film:
     description: A Film resource is a single film.
-    handler: functions/film.handler
+    handler: functions/films.handler
     events:
       - http:
-          path: api/film
+          path: api/films
           method: any
           cors: true
 

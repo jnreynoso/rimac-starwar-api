@@ -10,3 +10,5 @@ jspm_packages
 .env
 .env.yml
 .env.*
+
+artifacts

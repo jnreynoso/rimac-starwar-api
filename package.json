@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "sls offline start",
-    "inspect": "node --inspect ./node_modules/.bin/sls offline start"
+    "inspect": "node --inspect ./node_modules/.bin/sls offline start",
+    "artifacts": "sls package --package artifacts"
   },
   "keywords": [
     "Challenge"
