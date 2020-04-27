@@ -70,6 +70,40 @@ Los recursos implementados son los siguientes:
 
 You can operate on resources using HTTP methods such as `POST`, `GET`, `PUT`, and `DELETE`.
 
+#### Relational Model
+
+La estructura de los recursos de [`SWAPI`](https://swapi.py4e.com/documentation), resulta ser más cercana a un modelo `NoSQL` que a uno relacional. Dado que la base de datos a utilizar es **mysql**, se normalizaron las entidades y sus relaciones. Sin embargo, esto no es transparente para un cliente que consuma el API, pues, se mantiene la estructura mostrada en [`SWAPI`](https://swapi.py4e.com/documentation), pero, solo a nivel de presentación.
+
+Podemos agregar personas`(People)` al crear un recurso `Films`, especificando los **ids** o el **id** de persona(s) `(People)` existente. Esto para todos los hijos de Films `['people', 'planet', 'specie', 'starship', 'vehicle']`
+
+```bash
+curl -X POST http://localhost:8080/development/api/film \
+    -H "Content-Type: application/json" \
+    -d
+{
+    "director": "Jean Alessi Reynoso Mena",
+    "episode_id": 4,
+    "opening_crawl": "It is a period of civil war...",
+    "producer": "William S.",
+    "release_date": "Now",
+    "title": "El retorno infinito",
+    "people": 1
+}
+
+curl -X POST http://localhost:8080/development/api/film \
+    -H "Content-Type: application/json" \
+    -d
+{
+    "director": "Jean Alessi Reynoso Mena",
+    "episode_id": 4,
+    "opening_crawl": "It is a period of civil war...",
+    "producer": "William S.",
+    "release_date": "Now",
+    "title": "El retorno infinito",
+    "people": [1, 2, 3]
+}
+```
+
 ##### Films
 
 | Resource / HTTP method | Post             | Get         | Patch                  | Delete             |
@@ -109,5 +143,3 @@ npm run artifacts
 ```
 
 Configurando adecuadamente las AWS Credentials, el comando `sls deploy` debería desplegar las API's correctamente.
-
-
