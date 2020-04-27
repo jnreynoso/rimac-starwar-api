@@ -99,3 +99,15 @@ http://{host}:8082/{environment}/api/film
 ```sh
 npm start
 ```
+
+### Scripts
+
+Para generar los archivos *CloudFormation* ejecute:
+
+```sh
+npm run artifacts
+```
+
+Configurando adecuadamente las AWS Credentials, el comando `sls deploy` debería desplegar las API's correctamente.
+
+
