@@ -13,7 +13,7 @@ npm install
 ### Setup Environment
 
 Hacer una copia del archivo de entorno de ejemplo y setear las variables correspondientes.
-Considerar NODE_ENV con el valor *development* (Por defecto tendra este valor).
+Considerar *NODE_ENV* con el valor *development* (Por defecto tendra este valor).
 
 ```sh
 cp env.example.yml .env.yml
