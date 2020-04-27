@@ -3,10 +3,10 @@ import { Swapi } from 'swapi-utils'
 
 const { CorsMiddleware } = Middleware
 
-const getPeopleRepositorys = () => {
+const getPeople = () => {
   return new Promise(
     (resolve, reject) => {
-      Swapi.getPeopleRepositorys(data => resolve(data))
+      Swapi.getPeople(data => resolve(data))
     }
   )
 }
@@ -54,7 +54,7 @@ class PeopleRepositoryController extends BaseController {
     const { PeopleRepository } = this.unitOfWork
     const filters = this.request.query()
     const peoples = await PeopleRepository.get(filters)
-    const peoplesApi = await getPeopleRepositorys()
+    const peoplesApi = await getPeople()
 
     return {
       ...peoplesApi,
