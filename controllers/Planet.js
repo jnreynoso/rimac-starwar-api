@@ -11,7 +11,7 @@ const getPlanetRepositorys = () => {
   )
 }
 
-class PlanetRepositoryController extends BaseController {
+class PlanetController extends BaseController {
   constructor(unitOfWork) {
     super()
     this.unitOfWork = unitOfWork
@@ -105,4 +105,4 @@ class PlanetRepositoryController extends BaseController {
   }
 }
 
-export default PlanetRepositoryController
+export default PlanetController 

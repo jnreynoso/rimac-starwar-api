@@ -1,6 +1,6 @@
-import { FilmController } from 'swapi-controllers'
+import { FilmsController } from 'swapi-controllers'
 import { unitOfWork } from '../persistence'
 
-const filmController = new FilmController(unitOfWork)
+const filmsController = new FilmsController(unitOfWork)
 
-module.exports.handler = filmController.init.bind(filmController)
+module.exports.handler = filmsController.init.bind(filmsController)

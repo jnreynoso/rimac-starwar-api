@@ -11,7 +11,7 @@ const getPeople = () => {
   )
 }
 
-class PeopleRepositoryController extends BaseController {
+class PeopleController extends BaseController {
   constructor(unitOfWork) {
     super()
     this.unitOfWork = unitOfWork
@@ -26,21 +26,26 @@ class PeopleRepositoryController extends BaseController {
   }
 
   async handle(event, context, callback) {
+    const { id } = this.request.path()
     const method = this.request.method()
     var operation = null
 
     switch (method) {
       case 'GET':
-        operation = await this.get()
+        if (id)
+          operation = await this.getById(id)
+        else
+          operation = await this.get()
+
         break
       case 'POST':
         operation = await this.create()
         break
       case 'PATCH':
-        operation = await this.update()
+        operation = await this.update(id)
         break
       case 'DELETE':
-        operation = await this.remove()
+        operation = await this.remove(id)
         break
       default:
         res.status(500).send({ error: 'Method not supported!' })
@@ -62,9 +67,8 @@ class PeopleRepositoryController extends BaseController {
     }
   }
 
-  async getById() {
+  async getById(id) {
     const { PeopleRepository } = this.unitOfWork
-    const { id } = this.request.path()
     const people = await PeopleRepository.getById(id)
 
     return people
@@ -80,9 +84,8 @@ class PeopleRepositoryController extends BaseController {
     return peopleSaved
   }
 
-  async update() {
+  async update(id) {
     const { PeopleRepository } = this.unitOfWork
-    const { id } = this.request.path()
     const people = this.request.post()
 
     const rowUpdate = await PeopleRepository.update(id, people)
@@ -96,9 +99,8 @@ class PeopleRepositoryController extends BaseController {
     return {}
   }
 
-  async remove() {
+  async remove(id) {
     const { PeopleRepository } = this.unitOfWork
-    const { id } = this.request.path()
 
     const people = await PeopleRepository.remove(id)
 
@@ -106,4 +108,4 @@ class PeopleRepositoryController extends BaseController {
   }
 }
 
-export default PeopleRepositoryController
+export default PeopleController

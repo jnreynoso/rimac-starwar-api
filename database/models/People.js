@@ -107,7 +107,7 @@ module.exports = (sequelize, DataTypes) => {
   }
 
   People.addHook('afterCreate', async (people, options) => {
-    await People.update({ url: `http://${ip.address()}/${env}/api/people/${people.id}` }, {
+    await People.update({ url: `http://${ip.address()}:8082/${env}/api/people/${people.id}` }, {
       where: {
         id: people.id
       },

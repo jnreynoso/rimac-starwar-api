@@ -14,7 +14,7 @@ const getFilms = () => {
   )
 }
 
-class FilmRepositoryController extends BaseController {
+class FilmsController extends BaseController {
   constructor(unitOfWork) {
     super()
     this.unitOfWork = unitOfWork
@@ -29,21 +29,26 @@ class FilmRepositoryController extends BaseController {
   }
 
   async handle(event, context, callback) {
+    const { id } = this.request.path()
     const method = this.request.method()
     var operation = null
 
     switch (method) {
       case 'GET':
-        operation = await this.get()
+        if (id)
+          operation = await this.getById(id)
+        else
+          operation = await this.get()
+
         break
       case 'POST':
         operation = await this.create()
         break
       case 'PATCH':
-        operation = await this.update()
+        operation = await this.update(id)
         break
       case 'DELETE':
-        operation = await this.remove()
+        operation = await this.remove(id)
         break
       default:
         res.status(500).send({ error: 'Method not supported!' })
@@ -85,9 +90,8 @@ class FilmRepositoryController extends BaseController {
     }
   }
 
-  async getById() {
+  async getById(id) {
     const { FilmRepository } = this.unitOfWork
-    const { id } = this.request.path()
     const film = await FilmRepository.getById(id)
 
     return film
@@ -126,9 +130,8 @@ class FilmRepositoryController extends BaseController {
     return filmSaved
   }
 
-  async update() {
+  async update(id) {
     const { FilmRepository } = this.unitOfWork
-    const { id } = this.request.path()
     const film = this.request.post()
 
     const rowUpdate = await FilmRepository.update(id, film)
@@ -142,9 +145,8 @@ class FilmRepositoryController extends BaseController {
     return {}
   }
 
-  async remove() {
+  async remove(id) {
     const { FilmRepository } = this.unitOfWork
-    const { id } = this.request.path()
 
     const film = await FilmRepository.remove(id)
 
@@ -152,4 +154,4 @@ class FilmRepositoryController extends BaseController {
   }
 }
 
-export default FilmRepositoryController
+export default FilmsController

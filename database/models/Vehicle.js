@@ -101,7 +101,7 @@ module.exports = (sequelize, DataTypes) => {
 
 
   Vehicle.addHook('afterCreate', async (vehicle, options) => {
-    await Vehicle.update({ url: `http://${ip.address()}/${env}/api/vehicle/${vehicle.id}` }, {
+    await Vehicle.update({ url: `http://${ip.address()}:8082/${env}/api/vehicle/${vehicle.id}` }, {
       where: {
         id: vehicle.id
       },

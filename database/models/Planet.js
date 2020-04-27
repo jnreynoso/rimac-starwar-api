@@ -80,7 +80,7 @@ module.exports = (sequelize, DataTypes) => {
   }
 
   Planet.addHook('afterCreate', async (planet, options) => {
-    await Planet.update({ url: `http://${ip.address()}/${env}/api/planet/${planet.id}` }, {
+    await Planet.update({ url: `http://${ip.address()}:8082/${env}/api/planet/${planet.id}` }, {
       where: {
         id: planet.id
       },

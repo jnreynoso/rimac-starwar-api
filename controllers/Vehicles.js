@@ -11,7 +11,7 @@ const getVehicleRepositorys = () => {
   )
 }
 
-class VehicleRepositoryController extends BaseController {
+class VehiclesController extends BaseController {
   constructor(unitOfWork) {
     super()
     this.unitOfWork = unitOfWork
@@ -105,4 +105,4 @@ class VehicleRepositoryController extends BaseController {
   }
 }
 
-export default VehicleRepositoryController
+export default VehiclesController

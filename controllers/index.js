@@ -1,7 +1,7 @@
-import FilmController from './Film'
+import FilmsController from './Films'
 import PeopleController from './People'
 
 export {
-  FilmController,
+  FilmsController,
   PeopleController
 }

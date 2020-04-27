@@ -96,7 +96,7 @@ module.exports = (sequelize, DataTypes) => {
   }
 
   Specie.addHook('afterCreate', async (specie, options) => {
-    await Specie.update({ url: `http://${ip.address()}/${env}/api/specie/${specie.id}` }, {
+    await Specie.update({ url: `http://${ip.address()}:8082/${env}/api/specie/${specie.id}` }, {
       where: {
         id: specie.id
       },

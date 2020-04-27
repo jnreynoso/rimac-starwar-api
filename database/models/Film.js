@@ -101,7 +101,7 @@ module.exports = (sequelize, DataTypes) => {
   }
 
   Film.addHook('afterCreate', async (film, options) => {
-    await Film.update({ url: `http://${ip.address()}/${env}/api/people/${film.id}` }, {
+    await Film.update({ url: `http://${ip.address()}:8082/${env}/api/people/${film.id}` }, {
       where: {
         id: film.id
       },

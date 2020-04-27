@@ -11,7 +11,7 @@ const getSpecieRepositorys = () => {
   )
 }
 
-class SpecieRepositoryController extends BaseController {
+class SpecieController extends BaseController {
   constructor(unitOfwork) {
     super()
     this.unitOfwork = unitOfwork
@@ -105,4 +105,4 @@ class SpecieRepositoryController extends BaseController {
   }
 }
 
-export default SpecieRepositoryController
+export default SpecieController

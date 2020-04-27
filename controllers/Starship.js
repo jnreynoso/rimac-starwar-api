@@ -11,7 +11,7 @@ const getStarshipRepositorys = () => {
   )
 }
 
-class StarshipRepositoryController extends BaseController {
+class StarshipController extends BaseController {
   constructor(unitOfWork) {
     super()
     this.unitOfWork = unitOfWork
@@ -105,4 +105,4 @@ class StarshipRepositoryController extends BaseController {
   }
 }
 
-export default StarshipRepositoryController
+export default StarshipController

@@ -108,7 +108,7 @@ module.exports = (sequelize, DataTypes) => {
   }
 
   Starship.addHook('afterCreate', async (starship, options) => {
-    await Starship.update({ url: `http://${ip.address()}/${env}/api/starship/${starship.id}` }, {
+    await Starship.update({ url: `http://${ip.address()}:8082/${env}/api/starship/${starship.id}` }, {
       where: {
         id: starship.id
       },
