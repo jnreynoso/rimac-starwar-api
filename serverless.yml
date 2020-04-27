@@ -21,7 +21,7 @@ custom:
         - tedious
   stage: ${opt:stage, self:provider.stage}
   serverless-offline:
-    port: 8082
+    httpPort: 8082
     babelOptions:
       presets:
         - env
